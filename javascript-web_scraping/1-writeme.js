@@ -10,7 +10,6 @@ let dataToWrite = process.argv[3];
 // open and write the content to the file
 fs.writeFile(filename, dataToWrite, 'utf8', (err) => {
   if (err) {
-    console.error(err);
-    return;
+    console.log(err);
   }
 });

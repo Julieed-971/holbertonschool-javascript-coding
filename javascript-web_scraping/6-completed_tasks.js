@@ -30,7 +30,7 @@ request.get(url, (error, response, body) => {
       }
 
       // if completed is true, increment the number of completed task
-      if (isCompleted) {
+      if (isCompleted === true) {
         completedTasks[userId]++;
       }
     }

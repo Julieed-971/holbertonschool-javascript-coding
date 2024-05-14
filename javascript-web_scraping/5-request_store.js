@@ -11,7 +11,7 @@ const textToCopyUrl = process.argv[2];
 // get the filename to copy the text to
 const fileName = process.argv[3];
 
-// make a get request to the provided url 
+// make a get request to the provided url
 request.get(textToCopyUrl, (error, response, body) => {
   if (error) {
     console.log(error);

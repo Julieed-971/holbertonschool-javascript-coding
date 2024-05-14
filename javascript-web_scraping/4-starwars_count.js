@@ -11,32 +11,32 @@ request.get(url, (error, response, body) => {
     return;
   }
 
-  // Checking the response status code
+  // checking the response status code
   if (response.statusCode !== 200) {
     console.error(error);
     return;
   }
 
-  // Parse response body as JSON
+  // parse response body as JSON
   const movieData = JSON.parse(body);
 
-  // Check if the response contains a 'results' array
+  // check if the response contains a 'results' array
   if (Array.isArray(movieData.results)) {
     let count = 0;
 
-    // Iterate over each movie object
-    movieData.results.forEach(movie => {
+    // iterate over each movie object
+    for (const movie of movieData.results) {
 
-      // Iterate over the "characters" array of current movie
-      movie.characters.forEach(characterUrl => {
+      // iterate over the "characters" array of current movie
+      for (const characterUrl of movie.characters) {
 
-        // Check if characters array contains characterUrl
-        if (characterUrl.includes(18)) {
+        // check if characters array contains characterUrl
+        if (characterUrl.includes('18')) {
           count++;
+          break;
         }
-      })
-
-    });
+      }
+    }
     console.log(count);
   }
 });

@@ -13,14 +13,14 @@ const fileName = process.argv[3];
 
 // make a get request to the provided url 
 request.get(textToCopyUrl, (error, response, body) => {
-	if (error) {
-		console.log(error);
-	}
+  if (error) {
+    console.log(error);
+  }
 
-	// write the text from the URL to the specified file
-	fs.writeFile(fileName, body, 'utf8', (err) => {
-		if (err) {
-			console.log(err);
-		}
-	});
+  // write the text from the URL to the specified file
+  fs.writeFile(fileName, body, 'utf8', (err) => {
+    if (err) {
+      console.log(err);
+    }
+  });
 });

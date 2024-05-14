@@ -32,7 +32,7 @@ request.get(url, (error, response, body) => {
       movie.characters.forEach(characterUrl => {
 
         // Check if characters array contains characterUrl
-        if (characterUrl.includes(`https://swapi-api.hbtn.io/api/people/${characterID}`)) {
+        if (characterUrl.includes(characterID)) {
           count++;
         }
       })

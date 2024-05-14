@@ -18,8 +18,7 @@ request.get(url, (error, response, body) => {
   // iterate through the data
   for (const task of todosData) {
     // get the userId
-    const	userId = task.userId;
-
+    const userId = task.userId;
     // get the boolean value of the task completion status
     const isCompleted = task.completed;
 

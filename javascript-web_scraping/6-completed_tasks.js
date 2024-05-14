@@ -13,7 +13,7 @@ request.get(url, (error, response, body) => {
 
   // parse the json string into an object
   const todosData = JSON.parse(body);
-  let completedTasks = {};
+  const completedTasks = {};
 
   // iterate through the data
   for (const task of todosData) {

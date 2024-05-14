@@ -11,12 +11,6 @@ request.get(url, (error, response, body) => {
     return;
   }
 
-  // checking the response status code
-  if (response.statusCode !== 200) {
-    console.error(error);
-    return;
-  }
-
   // parse response body as JSON
   const movieData = JSON.parse(body);
 

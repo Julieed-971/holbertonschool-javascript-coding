@@ -1,6 +1,5 @@
 #!/usr/bin/node
 const request = require('request');
-const characterID = "18";
 
 // get the url to request
 const url = process.argv[2];
@@ -32,7 +31,7 @@ request.get(url, (error, response, body) => {
       movie.characters.forEach(characterUrl => {
 
         // Check if characters array contains characterUrl
-        if (characterUrl.includes(characterID)) {
+        if (characterUrl.includes(18)) {
           count++;
         }
       })

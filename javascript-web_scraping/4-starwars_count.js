@@ -1,6 +1,6 @@
 #!/usr/bin/node
 const request = require('request');
-const characterUrl = "https://swapi-api.hbtn.io/api/people/18/";
+const characterID = "18";
 
 // get the url to request
 const url = process.argv[2];
@@ -27,10 +27,16 @@ request.get(url, (error, response, body) => {
 
     // Iterate over each movie object
     movieData.results.forEach(movie => {
-      // Check if characters array contains characterUrl
-      if (movie.characters.includes(characterUrl)) {
-        count++;
-      }
+
+      // Iterate over the "characters" array of current movie
+      movie.characters.forEach(characterUrl => {
+
+        // Check if characters array contains characterUrl
+        if (characterUrl.includes(`https://swapi-api.hbtn.io/api/people/${characterID}`)) {
+          count++;
+        }
+      })
+
     });
     console.log(count);
   }

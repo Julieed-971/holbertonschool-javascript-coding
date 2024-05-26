@@ -5,7 +5,7 @@ process.stdin.setEncoding('utf-8');
 console.log('Welcome to Holberton School, what is your name?');
 
 // Listen for data from the standard input (stdin) once
-process.stdin.on('data', (data) => {
+process.stdin.once('data', (data) => {
   // Convert the input data to a string and remove any leading/trailing whitespace
   const input = data.trim();
 

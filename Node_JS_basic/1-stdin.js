@@ -1,3 +1,9 @@
+// Set the encoding for the stdin stream to UTF-8
+process.stdin.setEncoding('utf8');
+
+// Prompt the user for their name
+console.log('Welcome to Holberton School, what is your name?');
+
 // Listen for data from the standard input (stdin) once
 process.stdin.once('data', (data) => {
   // Convert the input data to a string and remove any leading/trailing whitespace
@@ -13,5 +19,5 @@ process.stdin.once('data', (data) => {
   process.exit(0);
 });
 
-// Prompt the user for their name
-console.log('Welcome to Holberton School, what is your name?');
+// Resume the stdin stream to start receiving data
+process.stdin.resume();

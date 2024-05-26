@@ -13,9 +13,9 @@ process.stdin.on('readable', () => {
     // Write the name in the standard output
     process.stdout.write(`Your name is: ${input}`);
   }
-  // Notify the user that the software is closing
-  process.stdout.write('This important software is now closing\n');
+});
 
-  // Exit the process
-  process.exit(0);
+// Notify the user that the software is closing
+process.stdin.on('end', () => {
+  process.stdout.write('This important software is now closing\n');
 });

@@ -7,7 +7,7 @@ console.log('Welcome to Holberton School, what is your name?');
 // Listen for data from the standard input (stdin) once
 process.stdin.once('data', (data) => {
   // Convert the input data to a string and remove any leading/trailing whitespace
-  const input = data.toString().trim();
+  const input = data.trim();
 
   // Log the input data to the console
   console.log(`Your name is: ${input}`);

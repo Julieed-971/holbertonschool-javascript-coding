@@ -11,7 +11,7 @@ function countStudents(fileName) {
     // If the file doesn't exist, throw an error
     throw new Error('Cannot load the database');
   } else {
-    // If the file exists, read its content as a string
+    // If the file exists, read its content synchronously
     const csvData = fs.readFileSync(filePath, 'utf8');
 
     // Split the CSV data into rows
@@ -27,23 +27,25 @@ function countStudents(fileName) {
 
     // Loop over each row
     for (const row of rows) {
+      // Check if the row is empty
+      if (row.trim() !== '') {
       // Split the row into values
-      const values = row.split(',');
-      const field = values[header.indexOf('field')];
+        const values = row.split(',');
+        const field = values[header.indexOf('field')];
 
-      // Increment total students count
-      data.total += 1;
+        // Increment total students count
+        data.total += 1;
 
-      // Initialize field data if not already done
-      if (!data.fields[field]) {
-        data.fields[field] = {
-          count: 0,
-          students: [],
-        };
+        // Initialize field data if not already done
+        if (!data.fields[field]) {
+          data.fields[field] = {
+            count: 0,
+            students: [],
+          };
+        }
+        data.fields[field].count += 1;
+        data.fields[field].students.push(values[header.indexOf('firstname')]);
       }
-
-      data.fields[field].count += 1;
-      data.fields[field].students.push(values[header.indexOf('firstname')]);
     }
     console.log(`Total number of students: ${data.total}`);
     Object.entries(data.fields).forEach(([field, fieldData]) => {

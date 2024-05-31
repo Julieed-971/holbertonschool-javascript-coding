@@ -1,6 +1,5 @@
 // Import the 'fs' module for file system operations
 const fs = require('fs').promises;
-const csvParser = require('csv-parser');
 
 // Define a function to count students from a CSV file
 async function countStudents(fileName) {
@@ -8,41 +7,25 @@ async function countStudents(fileName) {
   const filePath = `./${fileName}`;
 
   try {
-    // Create a readable stream file
-    const csvData = await fs.readFile(filePath, 'utf-8');
-    const studentsData = await new Promise((resolve, reject) => {
-      const data = [];
-      const readableStream = csvParser();
+    // Read file asynchronously
+    const data = await fs.readFile(filePath, 'utf-8');
+    // Format file by removing leading and trailing white space and split in row list
+    const rows = data.trim().split('\n');
+    // Create list of array containing students
+    const studentsList = rows.map((row) => row.split(','));
+    // Create a list of students filtered by fields
+    const csStudents = studentsList.filter((student) => student[3] === 'CS');
+    const sweStudents = studentsList.filter((student) => student[3] === 'SWE');
 
-      readableStream
-        .on('data', (row) => data.push(row))
-        .on('end', () => resolve(data))
-        .on('error', (err) => reject(err));
-      readableStream.write(csvData);
-      readableStream.end();
-    });
+    // Display total number of students
+    console.log(`Number of students: ${csStudents.length + sweStudents.length}`);
 
-    // Initialize variables to count number of students in each field
-    let csCount = 0;
-    const csStudents = [];
-    let sweCount = 0;
-    const sweStudents = [];
-    // Count and display number of total students
-    console.log(`Number of students: ${studentsData.length}`);
-    // Loop over students json data and count number of students by fields
-    for (const row of studentsData) {
-      // Create arrays of number of students by fields with their names
-      if (row.field === 'CS') {
-        csCount += 1;
-        csStudents.push(row.firstname);
-      } else if (row.field === 'SWE') {
-        sweCount += 1;
-        sweStudents.push(row.firstname);
-      }
-    }
-    // Display results
-    console.log(`Number of students in CS: ${csCount}. List: ${csStudents.join(', ')}`);
-    console.log(`Number of students in SWE: ${sweCount}. List: ${sweStudents.join(', ')}`);
+    // Create students firstname list and concatenate in a string separated by commas
+    const csFirstNameJoined = csStudents.map((student) => student[0]).join(', ');
+    const sweFirstNameJoined = sweStudents.map((student) => student[0]).join(', ');
+
+    console.log(`Number of students in CS: ${csStudents.length}. List: ${csFirstNameJoined}`);
+    console.log(`Number of students in SWE: ${sweStudents.length}. List: ${sweFirstNameJoined}`);
 
   // catch error and display error message if database doesn't load properly
   } catch (err) {

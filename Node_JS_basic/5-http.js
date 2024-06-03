@@ -1,10 +1,7 @@
 const http = require('http');
 const fs = require('fs').promises;
 
-//  Create a small HTTP server using the http module
-/**
- * @param {string} fileName
- */
+
 async function getStudentData(fileName) {
   // Create a file path from the provided file name
 
@@ -36,11 +33,12 @@ async function getStudentData(fileName) {
 
 const app = http.createServer(async (request, response) => {
   try {
-    // When the URL path is /, it should display Hello Holberton School! in the page body
+    // When the URL path is '/', display 'Hello Holberton School!' in the page body
     if (request.url === '/') {
       response.writeHead(200, { 'Content-type': 'text/plain' });
       response.write('Hello Holberton School!');
       response.end();
+    // When the URL path is '/students', display the list of students in the page body  
     } else if (request.url === '/students') {
       const students = await getStudentData(process.argv[2]);
       response.writeHead(200, { 'Content-type': 'text/plain' });
